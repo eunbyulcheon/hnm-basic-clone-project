@@ -13,7 +13,14 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
   }
 
-  button, input {
+  button {
+    outline: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  input {
     outline: none;
   }
 `;

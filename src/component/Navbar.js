@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -16,11 +17,18 @@ const Navbar = () => {
 		'Sustainability',
 	];
 
+	const navigate = useNavigate();
+	const goToLogin = () => {
+		navigate('/login');
+	};
+
 	return (
 		<>
 			<LoginButton>
 				<FontAwesomeIcon icon={faUser} />
-				<Login>Login</Login>
+				<Login type="button" onClick={goToLogin}>
+					Login
+				</Login>
 			</LoginButton>
 
 			<Logo>
@@ -29,8 +37,8 @@ const Navbar = () => {
 
 			<NavSection>
 				<NavBar>
-					{menuList.map((menu) => (
-						<MenuItem>{menu}</MenuItem>
+					{menuList.map((menu, idx) => (
+						<MenuItem key={idx}>{menu}</MenuItem>
 					))}
 				</NavBar>
 				<SearchBar>
@@ -50,8 +58,9 @@ const LoginButton = styled.div`
 	margin-top: 20px;
 `;
 
-const Login = styled.div`
-	margin-left: 10px;
+const Login = styled.button`
+	margin-left: 8px;
+	font-size: 14px;
 `;
 
 const Logo = styled.div`
@@ -67,7 +76,7 @@ const LogoImage = styled.img`
 const NavSection = styled.div`
 	display: flex;
 	position: relative;
-	margin: 25px auto;
+	margin: 25px auto 60px auto;
 `;
 
 const NavBar = styled.ul`
@@ -80,7 +89,7 @@ const NavBar = styled.ul`
 
 	@media (max-width: 768px) {
 		flex-wrap: wrap;
-		margin: 25px auto;
+		margin: 25px auto 60px auto;
 		justify-content: center;
 		gap: 10px;
 	}
