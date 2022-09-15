@@ -6,14 +6,14 @@ import styled from 'styled-components';
 
 const Navbar = () => {
 	const menuList = [
-		'여성',
+		'Ladies',
 		'Divided',
-		'남성',
-		'신생아/유아',
-		'아동',
-		'H&M Home',
+		'Men',
+		'Kids',
+		'Sport',
+		'MAGAZINE',
 		'Sale',
-		'지속가능성',
+		'Sustainability',
 	];
 
 	return (
@@ -23,23 +23,23 @@ const Navbar = () => {
 				<Login>Login</Login>
 			</LoginButton>
 
-			<NavSection>
-				<Logo src="https://logos-world.net/wp-content/uploads/2020/04/HM-Logo.png" />
-			</NavSection>
+			<Logo>
+				<LogoImage src="https://logos-world.net/wp-content/uploads/2020/04/HM-Logo.png" />
+			</Logo>
 
-			<MenuSection>
-				<MenuBar>
+			<NavSection>
+				<NavBar>
 					{menuList.map((menu) => (
 						<MenuItem>{menu}</MenuItem>
 					))}
-				</MenuBar>
+				</NavBar>
 				<SearchBar>
 					<SeachIcon>
 						<FontAwesomeIcon icon={faSearch} />
 					</SeachIcon>
-					<SearchInput type="text" placeholder="제품 검색" />
+					<SearchInput type="text" placeholder="Search Product" />
 				</SearchBar>
-			</MenuSection>
+			</NavSection>
 		</>
 	);
 };
@@ -47,33 +47,43 @@ const Navbar = () => {
 const LoginButton = styled.div`
 	display: flex;
 	justify-content: flex-end;
+	margin-top: 20px;
 `;
 
 const Login = styled.div`
-	margin-left: 5px;
+	margin-left: 10px;
 `;
 
-const NavSection = styled.div`
+const Logo = styled.div`
 	display: flex;
 	justify-content: center;
 	margin: 20px auto;
 `;
 
-const Logo = styled.img`
+const LogoImage = styled.img`
 	width: 100px;
 `;
 
-const MenuSection = styled.div`
-	width: 70%;
-	margin: 0 0 0 30%;
+const NavSection = styled.div`
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	position: relative;
+	margin: 25px auto;
 `;
 
-const MenuBar = styled.ul`
+const NavBar = styled.ul`
 	display: flex;
-	gap: 10px;
+	gap: 15px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+		margin: 25px auto;
+		justify-content: center;
+		gap: 10px;
+	}
 `;
 
 const MenuItem = styled.li`
@@ -82,6 +92,7 @@ const MenuItem = styled.li`
 
 const SearchBar = styled.div`
 	position: relative;
+	left: 84%;
 `;
 
 const SeachIcon = styled.div`
@@ -95,7 +106,7 @@ const SearchInput = styled.input`
 	padding: 0 0 5px 25px;
 	border: none;
 	border-bottom: 1.5px solid #000;
-	outline: none;
+	font-size: 14px;
 `;
 
 export default Navbar;
