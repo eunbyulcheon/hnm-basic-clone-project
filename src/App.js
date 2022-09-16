@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './component/Navbar';
 import Login from './page/Login';
 import Products from './page/Products';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from './route/PrivateRoute';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
 	const [auth, setAuth] = useState(false);
 
-	useEffect(() => {
-		console.log('aaa', auth);
-	}, [auth]);
-
 	return (
 		<>
-			<Navbar />
+			<Navbar auth={auth} setAuth={setAuth} />
 			<Routes>
 				<Route path="/login" element={<Login setAuth={setAuth} />} />
 				<Route path="/" element={<Products />} />

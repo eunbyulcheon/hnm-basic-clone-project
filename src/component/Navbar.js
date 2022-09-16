@@ -5,7 +5,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
-const Navbar = () => {
+const Navbar = ({ auth, setAuth }) => {
 	const menuList = [
 		'Ladies',
 		'Divided',
@@ -18,17 +18,28 @@ const Navbar = () => {
 	];
 
 	const navigate = useNavigate();
-	const goToLogin = () => {
-		navigate('/login');
+
+	const search = (e) => {
+		if (e.key === 'Enter') {
+			let keyword = e.target.value;
+			navigate(`/?q=${keyword}`);
+		}
 	};
 
 	return (
 		<>
 			<LoginButton>
-				<FontAwesomeIcon icon={faUser} />
-				<Login type="button" onClick={goToLogin}>
-					Login
-				</Login>
+				{auth ? (
+					<Logout onCLick={() => setAuth(false)}>
+						<FontAwesomeIcon icon={faUser} />
+						<Text>Logout</Text>
+					</Logout>
+				) : (
+					<Login onClick={() => navigate('/login')}>
+						<FontAwesomeIcon icon={faUser} />
+						<Text>Login</Text>
+					</Login>
+				)}
 			</LoginButton>
 
 			<Logo>
@@ -45,7 +56,11 @@ const Navbar = () => {
 					<SeachIcon>
 						<FontAwesomeIcon icon={faSearch} />
 					</SeachIcon>
-					<SearchInput type="text" placeholder="Search Product" />
+					<SearchInput
+						type="text"
+						placeholder="Search Product"
+						onKeyPress={(e) => search(e)}
+					/>
 				</SearchBar>
 			</NavSection>
 		</>
@@ -58,7 +73,13 @@ const LoginButton = styled.div`
 	margin-top: 20px;
 `;
 
-const Login = styled.button`
+const Login = styled.div`
+	cursor: pointer;
+`;
+
+const Logout = styled(Login)``;
+
+const Text = styled.span`
 	margin-left: 8px;
 	font-size: 14px;
 `;

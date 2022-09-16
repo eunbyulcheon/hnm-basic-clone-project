@@ -7,7 +7,6 @@ const Login = ({ setAuth }) => {
 
 	const loginUser = (e) => {
 		e.preventDefault();
-		console.log('login user function');
 		setAuth(true);
 		navigate('/');
 	};
@@ -27,9 +26,7 @@ const Login = ({ setAuth }) => {
 					<Form.Label>Password</Form.Label>
 					<Form.Control type="password" placeholder="Password" />
 				</Form.Group>
-				<Form.Group className="mb-3" controlId="formBasicCheckbox">
-					<Form.Check type="checkbox" label="Check me out" />
-				</Form.Group>
+
 				<Button variant="outline-danger" type="submit">
 					Login
 				</Button>
