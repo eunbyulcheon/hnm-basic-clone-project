@@ -5,25 +5,31 @@ import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 
 const Detail = () => {
 	const [product, setProduct] = useState(null);
+	const [loading, setLoading] = useState(false);
 	let { id } = useParams();
 
 	const getProductDetail = async () => {
+		setLoading(true);
 		let url = `http://localhost:8000/products/${id}`;
 		let response = await fetch(url);
 		let data = await response.json();
+		setLoading(false);
 		setProduct(data);
 	};
 
 	useEffect(() => {
 		getProductDetail();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	if (loading || product === null) return <h2>Loading...</h2>;
 
 	return (
 		<Wrapper>
 			<ProductImage src={product?.img} />
 			<Content>
 				<Title>{product?.title}</Title>
-				<Price>₩{product?.price}</Price>
+				<Price>₩{(product?.price).toLocaleString()}</Price>
 				<Choice>{product?.choice === true ? 'Customer Choice' : ''}</Choice>
 				<DropdownButton
 					as={ButtonGroup}

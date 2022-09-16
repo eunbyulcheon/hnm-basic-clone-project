@@ -1,34 +1,41 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import Sidebar from './Sidebar';
+
+export const menuList = [
+	'Ladies',
+	'Divided',
+	'Men',
+	'Kids',
+	'Sport',
+	'MAGAZINE',
+	'Sale',
+	'Sustainability',
+];
 
 const Navbar = ({ auth, setAuth }) => {
-	const menuList = [
-		'Ladies',
-		'Divided',
-		'Men',
-		'Kids',
-		'Sport',
-		'MAGAZINE',
-		'Sale',
-		'Sustainability',
-	];
-
+	const [sidebar, setSidebar] = useState(false);
 	const navigate = useNavigate();
 
-	const search = (e) => {
+	const showSidebar = () => setSidebar(!sidebar);
+
+	const onKeyEnter = (e) => {
 		if (e.key === 'Enter') {
-			let keyword = e.target.value;
-			navigate(`/?q=${keyword}`);
+			navigate(`/?q=${e.target.value}`);
 		}
 	};
 
 	return (
 		<>
-			<LoginButton>
+			<NavHeader>
+				<Hamburger onClick={showSidebar}>
+					<FontAwesomeIcon icon={faBars} />
+				</Hamburger>
+				{sidebar && <Sidebar active={setSidebar} />}
 				{auth ? (
 					<Logout onCLick={() => setAuth(false)}>
 						<FontAwesomeIcon icon={faUser} />
@@ -40,10 +47,12 @@ const Navbar = ({ auth, setAuth }) => {
 						<Text>Login</Text>
 					</Login>
 				)}
-			</LoginButton>
+			</NavHeader>
 
 			<Logo>
-				<LogoImage src="https://logos-world.net/wp-content/uploads/2020/04/HM-Logo.png" />
+				<Link to="/">
+					<LogoImage src="https://logos-world.net/wp-content/uploads/2020/04/HM-Logo.png" />
+				</Link>
 			</Logo>
 
 			<NavSection>
@@ -59,7 +68,7 @@ const Navbar = ({ auth, setAuth }) => {
 					<SearchInput
 						type="text"
 						placeholder="Search Product"
-						onKeyPress={(e) => search(e)}
+						onKeyPress={(e) => onKeyEnter(e)}
 					/>
 				</SearchBar>
 			</NavSection>
@@ -67,10 +76,23 @@ const Navbar = ({ auth, setAuth }) => {
 	);
 };
 
-const LoginButton = styled.div`
+const NavHeader = styled.div`
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	align-items: center;
 	margin-top: 20px;
+
+	@media (max-width: 63rem) {
+		margin: 20px -30px;
+	}
+`;
+
+const Hamburger = styled.div`
+	font-size: 20px;
+
+	@media (min-width: 63rem) {
+		visibility: hidden;
+	}
 `;
 
 const Login = styled.div`
@@ -108,11 +130,8 @@ const NavBar = styled.ul`
 	left: 50%;
 	transform: translate(-50%, -50%);
 
-	@media (max-width: 768px) {
-		flex-wrap: wrap;
-		margin: 25px auto 60px auto;
-		justify-content: center;
-		gap: 10px;
+	@media (max-width: 63rem) {
+		display: none;
 	}
 `;
 
@@ -123,6 +142,10 @@ const MenuItem = styled.li`
 const SearchBar = styled.div`
 	position: relative;
 	left: 84%;
+
+	@media (max-width: 63rem) {
+		display: none;
+	}
 `;
 
 const SeachIcon = styled.div`
