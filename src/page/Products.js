@@ -12,7 +12,7 @@ const Products = () => {
 	const getProducts = async () => {
 		try {
 			let searchQuery = query.get('q') || '';
-			let url = `http://localhost:8000/products?q=${searchQuery}`;
+			let url = `https://my-json-server.typicode.com/eunbyulcheon/hnm-basic-clone-project/products?q=${searchQuery}`;
 			let response = await fetch(url);
 			let data = await response.json();
 			if (data.length < 1) {

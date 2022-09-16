@@ -10,7 +10,7 @@ const Detail = () => {
 
 	const getProductDetail = async () => {
 		setLoading(true);
-		let url = `http://localhost:8000/products/${id}`;
+		let url = `https://my-json-server.typicode.com/eunbyulcheon/hnm-basic-clone-project/products/${id}`;
 		let response = await fetch(url);
 		let data = await response.json();
 		setLoading(false);

@@ -27,34 +27,43 @@ const Card = styled.div`
 	&:hover {
 		transform: scale(1.1);
 	}
+
+	@media (max-width: 63rem) {
+		width: 190px;
+		height: 450px;
+	}
 `;
 
 const ProductImage = styled.img`
 	width: 100%;
 	height: 396px;
+
+	@media (max-width: 63rem) {
+		height: 74%;
+	}
 `;
 
 const Choice = styled.p`
 	position: absolute;
-	top: 405px;
+	top: 76%;
 	font-size: 12px;
 	color: rgb(49, 127, 105);
 `;
 
 const ProductName = styled.h3`
 	position: absolute;
-	top: 425px;
+	top: 80%;
 	font-size: 16px;
 `;
 
 const ProductPrice = styled.p`
 	position: absolute;
-	top: 445px;
+	top: 83.5%;
 	font-size: 16px;
 `;
 
 const ProductArrival = styled(ProductPrice)`
-	top: 465px;
+	top: 87.5%;
 `;
 
 export default ProductCard;
