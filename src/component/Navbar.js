@@ -37,7 +37,7 @@ const Navbar = ({ auth, setAuth }) => {
 				</Hamburger>
 				{sidebar && <Sidebar active={setSidebar} />}
 				{auth ? (
-					<Logout onCLick={() => setAuth(false)}>
+					<Logout onClick={() => setAuth(false)}>
 						<FontAwesomeIcon icon={faUser} />
 						<Text>Logout</Text>
 					</Logout>
