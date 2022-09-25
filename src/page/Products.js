@@ -6,7 +6,7 @@ import { productAction } from '../redux/actions/productAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Products = () => {
-	const productList = useSelector((state) => state.productList);
+	const productList = useSelector((state) => state.product.productList);
 	// eslint-disable-next-line no-unused-vars
 	const [query, setQuery] = useSearchParams();
 	// const [error, setError] = useState('');
