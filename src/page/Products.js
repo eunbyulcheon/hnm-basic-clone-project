@@ -9,24 +9,11 @@ const Products = () => {
 	const productList = useSelector((state) => state.product.productList);
 	// eslint-disable-next-line no-unused-vars
 	const [query, setQuery] = useSearchParams();
-	// const [error, setError] = useState('');
 	const dispatch = useDispatch();
 
 	const getProducts = () => {
-		// try {
 		let searchQuery = query.get('q') || '';
 		dispatch(productAction.getProducts(searchQuery));
-
-		// 	if (data.length < 1) {
-		// 		if (searchQuery !== '') {
-		// 			setError(`${searchQuery}와 일치하는 상품이 없습니다`);
-		// 		} else {
-		// 			throw new Error('결과가 없습니다');
-		// 		}
-		// 	}
-		// } catch (err) {
-		// 	setError(err.message);
-		// }
 	};
 
 	useEffect(() => {
@@ -37,11 +24,6 @@ const Products = () => {
 	return (
 		<>
 			<Container>
-				{/* {error ? (
-					<Alert variant="danger" className="text-center">
-						{error}
-					</Alert>
-				) : ( */}
 				<Row>
 					{productList.length > 0 &&
 						productList.map((product) => (
@@ -50,7 +32,6 @@ const Products = () => {
 							</Col>
 						))}
 				</Row>
-				{/* )} */}
 			</Container>
 		</>
 	);

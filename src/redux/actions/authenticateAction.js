@@ -1,7 +1,13 @@
 const login = ({ id, pw }) => {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		dispatch({ type: 'LOGIN_SUCCESS', payload: { id, pw } });
 	};
 };
 
-export const authenticateAction = { login };
+const logout = (auth) => {
+	return (dispatch) => {
+		dispatch({ type: 'LOGOUT', payload: { auth } });
+	};
+};
+
+export const authenticateAction = { login, logout };

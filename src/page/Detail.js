@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { productAction } from '../redux/actions/productAction';
 
 const Detail = () => {
-	const [product, setProduct] = useState(null);
+	const product = useSelector((state) => state.product.productItem);
 	const [loading, setLoading] = useState(false);
-	let { id } = useParams();
+	const { id } = useParams();
+	const dispatch = useDispatch();
 
 	const getProductDetail = async () => {
 		setLoading(true);
-		let url = `https://my-json-server.typicode.com/eunbyulcheon/hnm-basic-clone-project/products/${id}`;
-		let response = await fetch(url);
-		let data = await response.json();
+		dispatch(productAction.getProductDetail(id));
 		setLoading(false);
-		setProduct(data);
 	};
 
 	useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './component/Navbar';
 import Login from './page/Login';
@@ -7,15 +7,13 @@ import PrivateRoute from './route/PrivateRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
-	const [auth, setAuth] = useState(false);
-
 	return (
 		<>
-			<Navbar auth={auth} setAuth={setAuth} />
+			<Navbar />
 			<Routes>
-				<Route path="/login" element={<Login setAuth={setAuth} />} />
+				<Route path="/login" element={<Login />} />
 				<Route path="/" element={<Products />} />
-				<Route path="/products/:id" element={<PrivateRoute auth={auth} />} />
+				<Route path="/products/:id" element={<PrivateRoute />} />
 			</Routes>
 		</>
 	);

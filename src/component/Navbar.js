@@ -5,6 +5,8 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
+import { useDispatch, useSelector } from 'react-redux';
+import { authenticateAction } from '../redux/actions/authenticateAction';
 
 export const menuList = [
 	'Ladies',
@@ -17,11 +19,19 @@ export const menuList = [
 	'Sustainability',
 ];
 
-const Navbar = ({ auth, setAuth }) => {
+const Navbar = () => {
+	const auth = useSelector((state) => state.auth.authenticate);
 	const [sidebar, setSidebar] = useState(false);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const showSidebar = () => setSidebar(!sidebar);
+
+	const logoutUser = (e) => {
+		e.preventDefault();
+		dispatch(authenticateAction.logout(auth));
+		navigate('/login');
+	};
 
 	const onKeyEnter = (e) => {
 		if (e.key === 'Enter') {
@@ -37,7 +47,7 @@ const Navbar = ({ auth, setAuth }) => {
 				</Hamburger>
 				{sidebar && <Sidebar active={setSidebar} />}
 				{auth ? (
-					<Logout onClick={() => setAuth(false)}>
+					<Logout onClick={logoutUser}>
 						<FontAwesomeIcon icon={faUser} />
 						<Text>Logout</Text>
 					</Logout>
